@@ -16,10 +16,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sri Devi Temple — Donate with Devotion",
+  title: "Daanam — Temple Donations Management Platform",
   description:
-    "Make a donation to Sri Devi Temple. Secure, verified payments with instant digital receipts. Support temple maintenance, annadanam, festivals, and community programs.",
-  keywords: ["temple", "donation", "hindu", "seva", "annadanam", "upi", "online donation"],
+    "Support temple maintenance, annadanam, festivals, and community programs. Secure, verified payments with instant digital receipts on Daanam.",
+  keywords: ["daanam", "temple", "donation", "seva", "annadanam", "upi", "online donation", "digital offering"],
 };
 
 export default function RootLayout({

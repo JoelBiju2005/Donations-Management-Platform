@@ -33,17 +33,17 @@ function Hero() {
 
       <div className="relative max-w-5xl mx-auto px-6 text-center">
         <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gold mb-6 leading-tight">
-          Sri Devi Temple
+          Daanam Digital
         </h1>
-        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Where devotion meets divine grace. Your generous contributions sustain traditions,
-          nourish the community, and preserve our sacred heritage.
+        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed font-heading">
+          Where devotion meets divine grace. Your sacred offerings preserve heritage,
+          feed the community, and keep the eternal flame burning.
         </p>
         <Link
           href="/donate"
           className="inline-flex items-center gap-2 bg-saffron hover:bg-saffron/90 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
         >
-          🙏 Donate Now
+          🙏 Offer Seva Now
         </Link>
       </div>
     </section>
@@ -55,13 +55,12 @@ function AboutSection() {
   return (
     <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">About the Temple</h2>
+        <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-maroon">About Daanam</h2>
         <div className="gold-divider max-w-20 mx-auto mb-8" />
-        <p className="text-lg leading-relaxed text-ink/70 max-w-3xl mx-auto">
-          Sri Devi Temple is a sacred place of worship dedicated to the Divine Mother.
-          For centuries, devotees have gathered here to seek blessings, find peace, and
-          participate in the rich spiritual traditions that connect us to our heritage.
-          The temple serves as a beacon of spiritual wisdom and community service.
+        <p className="text-lg leading-relaxed text-ink/75 max-w-3xl mx-auto font-heading italic">
+          &ldquo;Daanam&rdquo; represents the sacred duty of selfless giving. This digital platform facilitates 
+          seamless, secure, and direct offerings to sustain our temple traditions, feed the needy (Annadanam), 
+          and support holy ceremonies with full digital verification.
         </p>
       </div>
     </section>
@@ -190,9 +189,9 @@ function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="font-heading text-xl text-gold font-semibold mb-4">Sri Devi Temple</h3>
+            <h3 className="font-heading text-xl text-gold font-semibold mb-4">Daanam Digital</h3>
             <p className="text-sm leading-relaxed">
-              A sacred place of worship dedicated to the Divine Mother.
+              Sustaining sacred traditions and facilitating divine offerings with transparent digital verification.
             </p>
           </div>
           <div>
@@ -203,15 +202,15 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-4">Contact</h4>
+            <h4 className="font-semibold text-white mb-4">Contact Support</h4>
             <ul className="space-y-2 text-sm">
               <li>+91 98765 43210</li>
-              <li>info@srideviTemple.org</li>
+              <li>support@daanam-digital.org</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-          <p>© {new Date().getFullYear()} Sri Devi Temple Trust. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Daanam Trust. All rights reserved.</p>
           <Link href="/admin/login" className="text-white/40 hover:text-gold transition-colors">
             Admin Login
           </Link>

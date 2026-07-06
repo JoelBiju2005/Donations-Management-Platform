@@ -2,14 +2,14 @@
 
 @theme {
   /* ─── Temple Design System Tokens ─── */
-  --color-base: #FBF7F0;
-  --color-saffron: #F4A100;
-  --color-maroon: #6B1D24;
-  --color-gold: #C9A227;
-  --color-ink: #2A2118;
+  --color-base: #FDFBF7;
+  --color-saffron: #D97706;
+  --color-maroon: #7E1925;
+  --color-gold: #C59B27;
+  --color-ink: #2C1B18;
   --color-success: #3D7A4A;
   --color-warning: #B8860B;
-  --color-error: #A63D40;
+  --color-error: #BA1A1A;
 
   /* Surfaces */
   --color-surface: #FFFFFF;
