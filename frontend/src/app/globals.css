@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@theme {
+  /* ─── Temple Design System Tokens ─── */
+  --color-base: #FBF7F0;
+  --color-saffron: #F4A100;
+  --color-maroon: #6B1D24;
+  --color-gold: #C9A227;
+  --color-ink: #2A2118;
+  --color-success: #3D7A4A;
+  --color-warning: #B8860B;
+  --color-error: #A63D40;
+
+  /* Surfaces */
+  --color-surface: #FFFFFF;
+  --color-surface-warm: #FAF5EB;
+  --color-surface-elevated: #FFFFFF;
+
+  /* Dark mode surfaces */
+  --color-dark-bg: #1A1210;
+  --color-dark-surface: #251D18;
+  --color-dark-elevated: #302520;
+
+  /* Fonts */
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(42, 33, 24, 0.06);
+  --shadow-md: 0 4px 12px rgba(42, 33, 24, 0.08);
+  --shadow-lg: 0 8px 30px rgba(42, 33, 24, 0.12);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background-color: var(--color-base);
+    line-height: 1.6;
+  }
+
+  .dark body {
+    color: #E8DFD4;
+    background-color: var(--color-dark-bg);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-maroon);
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: var(--color-gold);
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-saffron);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: rgba(244, 161, 0, 0.2);
+    color: var(--color-maroon);
+  }
+}
+
+@layer utilities {
+  .gold-border {
+    border: 1px solid rgba(201, 162, 39, 0.2);
+  }
+
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+  }
+
+  .text-gradient-saffron {
+    background: linear-gradient(135deg, var(--color-saffron), var(--color-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #f0ebe0 25%, #e8e0d0 50%, #f0ebe0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+  }
+
+  .dark .skeleton {
+    background: linear-gradient(90deg, #302520 25%, #3D3028 50%, #302520 75%);
+    background-size: 200% 100%;
+  }
+
+  @keyframes skeleton-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @media print {
+    .no-print { display: none !important; }
+    body { background: white !important; }
+    .print-only { display: block !important; }
+  }
+}
