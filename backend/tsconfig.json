@@ -14,18 +14,6 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"],
-      "@config/*": ["./config/*"],
-      "@core/*": ["./core/*"],
-      "@middleware/*": ["./middleware/*"],
-      "@models/*": ["./models/*"],
-      "@modules/*": ["./modules/*"],
-      "@services/*": ["./services/*"],
-      "@workers/*": ["./workers/*"],
-      "@queues/*": ["./queues/*"]
-    },
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
