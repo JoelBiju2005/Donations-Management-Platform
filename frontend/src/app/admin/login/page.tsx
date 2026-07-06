@@ -29,46 +29,120 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-base flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-heading font-bold text-maroon">Admin Login</h1>
-          <p className="text-ink/50 mt-2">Temple Donation Management</p>
+    <div className="min-h-screen bg-vermilion flex items-center justify-center px-6 relative overflow-hidden">
+      {/* Sacred background patterns */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse at 30% 20%, rgba(197,155,39,0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at 70% 80%, rgba(197,155,39,0.06) 0%, transparent 50%)
+          `,
+        }}
+      />
+      {/* Subtle grid */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(197,155,39,1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(197,155,39,1) 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px",
+        }}
+      />
+
+      <div className="w-full max-w-md relative">
+        {/* Title */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 bg-white/5 border border-gold/20 rounded-full px-4 py-1.5 mb-6">
+            <span className="text-gold/80 text-xs font-medium tracking-widest uppercase">
+              Admin Portal
+            </span>
+          </div>
+          <h1 className="text-3xl font-heading font-bold text-gold">
+            Daanam Admin
+          </h1>
+          <p className="text-white/40 mt-2 text-sm">
+            Temple Donation Management System
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-xl p-8 gold-border shadow-md space-y-5">
+        {/* Login card */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white/95 backdrop-blur-sm temple-arch p-8 md:p-10 ambient-glow-strong space-y-6"
+        >
           {error && (
-            <div className="bg-error/10 text-error rounded-lg p-3 text-sm" role="alert">{error}</div>
+            <div
+              className="bg-error/8 border border-error/20 text-error rounded-lg p-3.5 text-sm"
+              role="alert"
+            >
+              {error}
+            </div>
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-ink/70 mb-1.5">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-xs font-semibold text-ink-muted mb-2 tracking-wider uppercase"
+            >
+              Email Address
+            </label>
             <input
-              id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-              required autoComplete="email" placeholder="admin@temple.local"
-              className="w-full px-4 py-3 rounded-lg border border-gold/20 focus:border-saffron focus:ring-2 focus:ring-saffron/20 outline-none"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+              placeholder="admin@example.com"
+              className="w-full px-4 py-3 rounded-lg bg-surface-warm border border-outline-variant/30 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none text-sm transition-colors"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-ink/70 mb-1.5">Password</label>
+            <label
+              htmlFor="password"
+              className="block text-xs font-semibold text-ink-muted mb-2 tracking-wider uppercase"
+            >
+              Password
+            </label>
             <input
-              id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-              required autoComplete="current-password" placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-lg border border-gold/20 focus:border-saffron focus:ring-2 focus:ring-saffron/20 outline-none"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+              placeholder="••••••••"
+              className="w-full px-4 py-3 rounded-lg bg-surface-warm border border-outline-variant/30 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none text-sm transition-colors"
             />
           </div>
 
           <button
-            type="submit" disabled={loading}
-            className="w-full py-3 bg-maroon hover:bg-maroon/90 disabled:bg-ink/10 text-white font-semibold rounded-lg transition-colors"
+            type="submit"
+            disabled={loading}
+            className="w-full py-3.5 bg-vermilion hover:bg-vermilion-light disabled:bg-outline-variant/30 disabled:text-ink/25 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-md text-sm tracking-wide"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? (
+              <span className="inline-flex items-center gap-2">
+                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Signing in...
+              </span>
+            ) : (
+              "Sign In"
+            )}
           </button>
         </form>
 
-        <p className="text-center text-xs text-ink/30 mt-6">
-          <a href="/" className="hover:text-saffron transition-colors">← Back to Temple Website</a>
+        <p className="text-center text-xs text-white/25 mt-8">
+          <a
+            href="/"
+            className="hover:text-gold/60 transition-colors duration-200"
+          >
+            ← Back to Daanam Website
+          </a>
         </p>
       </div>
     </div>

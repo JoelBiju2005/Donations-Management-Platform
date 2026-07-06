@@ -1,40 +1,55 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Temple Design System Tokens ─── */
-  --color-base: #FDFBF7;
-  --color-saffron: #D97706;
+  /* ─── Sacred Devotion Design System ─── */
+  /* Primary — Deep Vermilion Crimson (Kumkuma) */
+  --color-vermilion: #7E1925;
+  --color-vermilion-deep: #5E0012;
+  --color-vermilion-light: #A63740;
   --color-maroon: #7E1925;
+
+  /* Accent — Gilded Gold (Deepam) */
   --color-gold: #C59B27;
-  --color-ink: #2C1B18;
+  --color-gold-bright: #FECE57;
+  --color-gold-dim: #EEC14B;
+  --color-saffron: #C59B27;
+
+  /* Neutral — Charcoal Basalt */
+  --color-ink: #1E1B18;
+  --color-ink-muted: #574141;
+
+  /* Surfaces — Warm Sandstone */
+  --color-base: #FFF8F5;
+  --color-surface: #FFFFFF;
+  --color-surface-warm: #FBF2ED;
+  --color-surface-container: #F5ECE7;
+  --color-surface-elevated: #EFE6E2;
+
+  /* Semantic */
   --color-success: #3D7A4A;
   --color-warning: #B8860B;
   --color-error: #BA1A1A;
 
-  /* Surfaces */
-  --color-surface: #FFFFFF;
-  --color-surface-warm: #FAF5EB;
-  --color-surface-elevated: #FFFFFF;
+  /* Outline */
+  --color-outline: #8A7171;
+  --color-outline-variant: #DDBFBF;
 
-  /* Dark mode surfaces */
-  --color-dark-bg: #1A1210;
-  --color-dark-surface: #251D18;
-  --color-dark-elevated: #302520;
-
-  /* Fonts */
-  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  /* Fonts — Playfair Display + Inter */
+  --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
-  /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  /* Radius — Rectilinear / stone-cut feel */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(42, 33, 24, 0.06);
-  --shadow-md: 0 4px 12px rgba(42, 33, 24, 0.08);
-  --shadow-lg: 0 8px 30px rgba(42, 33, 24, 0.12);
+  /* Shadows — Subtle, warm-toned */
+  --shadow-sm: 0 1px 3px rgba(30, 27, 24, 0.06);
+  --shadow-md: 0 4px 14px rgba(30, 27, 24, 0.08);
+  --shadow-lg: 0 8px 30px rgba(30, 27, 24, 0.12);
+  --shadow-glow: 0 0 40px rgba(197, 155, 39, 0.12);
 }
 
 @layer base {
@@ -51,20 +66,11 @@
     line-height: 1.6;
   }
 
-  .dark body {
-    color: #E8DFD4;
-    background-color: var(--color-dark-bg);
-  }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 600;
     line-height: 1.2;
-    color: var(--color-maroon);
-  }
-
-  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-    color: var(--color-gold);
+    color: var(--color-vermilion);
   }
 
   .tabular-nums {
@@ -72,44 +78,110 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-saffron);
+    outline: 2px solid var(--color-gold);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
   ::selection {
-    background: rgba(244, 161, 0, 0.2);
-    color: var(--color-maroon);
+    background: rgba(197, 155, 39, 0.2);
+    color: var(--color-vermilion);
   }
 }
 
 @layer utilities {
+  /* ─── Gold ornamental border ─── */
   .gold-border {
-    border: 1px solid rgba(201, 162, 39, 0.2);
+    border: 1px solid rgba(197, 155, 39, 0.25);
   }
 
+  /* ─── Gold gradient divider line ─── */
   .gold-divider {
     height: 1px;
     background: linear-gradient(to right, transparent, var(--color-gold), transparent);
   }
 
-  .text-gradient-saffron {
-    background: linear-gradient(135deg, var(--color-saffron), var(--color-gold));
+  /* ─── Sacred text gradient ─── */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-bright), var(--color-gold));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  /* ─── Temple Arch card styling (rounded top, straight bottom) ─── */
+  .temple-arch {
+    border-radius: 1.5rem 1.5rem var(--radius-md) var(--radius-md);
+  }
+
+  /* ─── Ambient Glow (soft gold illumination behind cards) ─── */
+  .ambient-glow {
+    box-shadow:
+      0 0 60px rgba(197, 155, 39, 0.08),
+      0 4px 14px rgba(30, 27, 24, 0.06);
+  }
+
+  .ambient-glow-strong {
+    box-shadow:
+      0 0 80px rgba(197, 155, 39, 0.15),
+      0 4px 20px rgba(30, 27, 24, 0.08);
+  }
+
+  /* ─── Mandala subtle background texture ─── */
+  .mandala-bg {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(197, 155, 39, 0.04) 0%, transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(126, 25, 37, 0.03) 0%, transparent 60%);
+  }
+
+  /* ─── Sacred Vermilion chip ─── */
+  .sacred-chip {
+    background: rgba(126, 25, 37, 0.08);
+    color: var(--color-vermilion);
+    border-radius: var(--radius-sm);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Sacred input — bottom-border style ─── */
+  .sacred-input {
+    border: none;
+    border-bottom: 2px solid var(--color-outline-variant);
+    border-radius: 0;
+    background: transparent;
+    padding: 0.75rem 0;
+    transition: border-color 0.2s ease;
+  }
+
+  .sacred-input:focus {
+    border-bottom-color: var(--color-gold);
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* ─── Gold progress bar ─── */
+  .sacred-progress {
+    background: var(--color-surface-container);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .sacred-progress-fill {
+    background: linear-gradient(90deg, var(--color-gold), var(--color-gold-bright));
+    border-radius: var(--radius-full);
+    height: 100%;
+    transition: width 0.5s ease;
+  }
+
+  /* ─── Loading skeleton (sandstone-toned) ─── */
   .skeleton {
-    background: linear-gradient(90deg, #f0ebe0 25%, #e8e0d0 50%, #f0ebe0 75%);
+    background: linear-gradient(90deg, #F5ECE7 25%, #EFE6E2 50%, #F5ECE7 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.5s ease-in-out infinite;
     border-radius: var(--radius-sm);
-  }
-
-  .dark .skeleton {
-    background: linear-gradient(90deg, #302520 25%, #3D3028 50%, #302520 75%);
-    background-size: 200% 100%;
   }
 
   @keyframes skeleton-shimmer {
@@ -117,6 +189,27 @@
     100% { background-position: 200% 0; }
   }
 
+  /* ─── Subtle float animation for decorative elements ─── */
+  @keyframes sacred-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .animate-sacred-float {
+    animation: sacred-float 6s ease-in-out infinite;
+  }
+
+  /* ─── Subtle pulse glow for CTAs ─── */
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(197, 155, 39, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(197, 155, 39, 0.25); }
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  /* ─── Print styles ─── */
   @media print {
     .no-print { display: none !important; }
     body { background: white !important; }

@@ -10,7 +10,7 @@ const envSchema = z.object({
   // Server
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().default(5000),
-  FRONTEND_URL: z.string().url().default('http://localhost:3000'),
+  FRONTEND_URL: z.string().default('http://localhost:3000'),
 
   // MongoDB
   MONGODB_URI: z.string().default('mongodb://localhost:27017/temple-donations'),
@@ -30,7 +30,7 @@ const envSchema = z.object({
   // Email (Brevo) — optional for dev, required for production
   BREVO_API_KEY: z.string().optional(),
   EMAIL_FROM_ADDRESS: z.string().email().default('noreply@temple.local'),
-  EMAIL_FROM_NAME: z.string().default('Sri Devi Temple'),
+  EMAIL_FROM_NAME: z.string().default('Daanam Digital'),
 
   // Storage
   STORAGE_PROVIDER: z.enum(['local', 's3']).default('s3'), // Default to s3 for production

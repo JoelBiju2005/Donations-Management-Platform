@@ -48,11 +48,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen bg-base flex">
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-maroon text-white transform transition-transform duration-200 lg:translate-x-0 lg:static ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-vermilion-deep text-white transform transition-transform duration-200 lg:translate-x-0 lg:static ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}>
         <div className="p-6">
-          <h1 className="text-xl font-heading font-bold text-gold">Temple Admin</h1>
+          <h1 className="text-xl font-heading font-bold text-gold">Daanam Admin</h1>
           <p className="text-white/40 text-xs mt-1">{admin.email}</p>
         </div>
 
