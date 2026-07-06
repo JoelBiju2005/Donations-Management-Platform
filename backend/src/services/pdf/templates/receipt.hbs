@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #2A2118; background: #fff; padding: 0; }
+
+    .receipt { max-width: 700px; margin: 0 auto; padding: 40px; }
+
+    /* Header */
+    .receipt-header { text-align: center; border-bottom: 2px solid #C9A227; padding-bottom: 24px; margin-bottom: 32px; }
+    .temple-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #6B1D24; font-weight: 700; margin-bottom: 4px; }
+    .temple-address { font-size: 12px; color: #888; margin-bottom: 8px; }
+    .receipt-title { font-size: 18px; font-weight: 600; color: #C9A227; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; }
+
+    /* Receipt info */
+    .receipt-info { display: flex; justify-content: space-between; margin-bottom: 32px; font-size: 13px; }
+    .receipt-info div { }
+    .receipt-info .label { color: #888; margin-bottom: 2px; }
+    .receipt-info .value { font-weight: 600; color: #2A2118; }
+
+    /* Divider */
+    .gold-divider { height: 1px; background: linear-gradient(to right, transparent, #C9A227, transparent); margin: 24px 0; }
+
+    /* Details table */
+    .details-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    .details-table td { padding: 10px 0; vertical-align: top; border-bottom: 1px solid #f0ebe0; }
+    .details-table td:first-child { color: #888; width: 40%; font-size: 13px; }
+    .details-table td:last-child { font-weight: 500; text-align: right; }
+
+    /* Amount highlight */
+    .amount-row td { font-size: 22px; font-weight: 700; color: #6B1D24; border-bottom: 2px solid #C9A227; padding: 16px 0; }
+
+    /* Dedication */
+    .dedication { font-style: italic; color: #555; border-left: 3px solid #C9A227; padding: 12px 16px; margin: 24px 0; background: #faf8f3; border-radius: 0 8px 8px 0; }
+
+    /* Thank you */
+    .thank-you { text-align: center; padding: 24px; margin: 24px 0; }
+    .thank-you p { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #6B1D24; }
+
+    /* Footer */
+    .receipt-footer { border-top: 1px solid #e8e0d0; padding-top: 16px; text-align: center; font-size: 11px; color: #aaa; }
+    .receipt-footer p { margin: 2px 0; }
+
+    @media print {
+      body { padding: 0; }
+      .receipt { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt">
+    <div class="receipt-header">
+      <div class="temple-name">{{templeName}}</div>
+      <div class="temple-address">{{templeAddress}}</div>
+      <div class="receipt-title">Donation Receipt</div>
+    </div>
+
+    <div class="receipt-info">
+      <div>
+        <div class="label">Receipt Number</div>
+        <div class="value" style="font-size: 16px; color: #6B1D24;">{{receiptNumber}}</div>
+      </div>
+      <div style="text-align: right;">
+        <div class="label">Date</div>
+        <div class="value">{{date}}</div>
+      </div>
+    </div>
+
+    <div class="gold-divider"></div>
+
+    <table class="details-table">
+      <tr class="amount-row">
+        <td>Donation Amount</td>
+        <td>₹{{amount}}</td>
+      </tr>
+      <tr>
+        <td>Donor Name</td>
+        <td>{{donorName}}</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>{{donorPhone}}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{donorEmail}}</td>
+      </tr>
+      <tr>
+        <td>Payment Method</td>
+        <td>{{paymentMethod}}</td>
+      </tr>
+      {{#if transactionId}}
+      <tr>
+        <td>Transaction ID</td>
+        <td style="font-family: monospace;">{{transactionId}}</td>
+      </tr>
+      {{/if}}
+      {{#if time}}
+      <tr>
+        <td>Time</td>
+        <td>{{time}}</td>
+      </tr>
+      {{/if}}
+    </table>
+
+    {{#if dedicationNote}}
+    <div class="dedication">"{{dedicationNote}}"</div>
+    {{/if}}
+
+    <div class="thank-you">
+      <p>🙏 Thank you for your generous contribution.</p>
+      <p>May your kindness be blessed abundantly.</p>
+    </div>
+
+    <div class="receipt-footer">
+      <p>{{templeName}}</p>
+      <p>{{templeAddress}} | {{templePhone}} | {{templeEmail}}</p>
+      {{#if registrationNumber}}
+      <p>Registration No: {{registrationNumber}}</p>
+      {{/if}}
+      <p style="margin-top: 8px;">This is a computer-generated receipt and does not require a physical signature.</p>
+    </div>
+  </div>
+</body>
+</html>

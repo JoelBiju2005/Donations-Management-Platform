@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Confirmation</title>
+  <style>
+    body { margin: 0; padding: 0; background-color: #FBF7F0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .container { max-width: 600px; margin: 0 auto; background: #ffffff; }
+    .header { background-color: #6B1D24; padding: 32px; text-align: center; }
+    .header h1 { color: #C9A227; margin: 0; font-size: 24px; font-family: Georgia, serif; }
+    .header p { color: #FBF7F0; margin: 8px 0 0; font-size: 14px; }
+    .body-content { padding: 32px; }
+    .greeting { color: #2A2118; font-size: 18px; margin-bottom: 16px; }
+    .message { color: #555; line-height: 1.6; margin-bottom: 24px; }
+    .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    .summary-table td { padding: 12px 16px; border-bottom: 1px solid #f0ebe0; color: #2A2118; }
+    .summary-table td:first-child { color: #888; font-size: 14px; width: 40%; }
+    .summary-table td:last-child { font-weight: 600; text-align: right; }
+    .amount-row td { font-size: 20px !important; color: #6B1D24 !important; border-bottom: 2px solid #C9A227; }
+    .receipt-box { background: #FBF7F0; border: 1px solid #C9A227; border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 24px; }
+    .receipt-box p { margin: 4px 0; color: #2A2118; }
+    .receipt-number { font-size: 20px; font-weight: 700; color: #6B1D24; letter-spacing: 1px; }
+    .footer { background: #f8f5ef; padding: 24px 32px; text-align: center; border-top: 1px solid #e8e0d0; }
+    .footer p { color: #888; font-size: 12px; margin: 4px 0; }
+    .divider { height: 2px; background: linear-gradient(to right, transparent, #C9A227, transparent); margin: 24px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>{{templeName}}</h1>
+      <p>Donation Confirmation</p>
+    </div>
+    <div class="body-content">
+      <p class="greeting">🙏 Namaste, {{donorName}}!</p>
+      <p class="message">
+        Thank you for your generous donation to {{templeName}}. Your contribution has been successfully verified and recorded. May your kindness be blessed abundantly.
+      </p>
+
+      <div class="divider"></div>
+
+      <table class="summary-table">
+        <tr class="amount-row">
+          <td>Donation Amount</td>
+          <td>₹{{amount}}</td>
+        </tr>
+        <tr>
+          <td>Payment Method</td>
+          <td>{{paymentMethod}}</td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td>{{date}}</td>
+        </tr>
+        {{#if transactionId}}
+        <tr>
+          <td>Transaction ID</td>
+          <td>{{transactionId}}</td>
+        </tr>
+        {{/if}}
+      </table>
+
+      <div class="receipt-box">
+        <p>Your Receipt Number</p>
+        <p class="receipt-number">{{receiptNumber}}</p>
+        <p style="font-size: 12px; color: #888;">Please save this for your records</p>
+      </div>
+
+      {{#if dedicationNote}}
+      <p class="message" style="font-style: italic; border-left: 3px solid #C9A227; padding-left: 16px;">
+        "{{dedicationNote}}"
+      </p>
+      {{/if}}
+
+      <p class="message">
+        Your PDF receipt is attached to this email. You can also download it from our website.
+      </p>
+    </div>
+    <div class="footer">
+      <p>{{templeName}}</p>
+      <p>{{templeAddress}}</p>
+      <p>{{templePhone}} | {{templeEmail}}</p>
+      {{#if registrationNumber}}
+      <p>Registration No: {{registrationNumber}}</p>
+      {{/if}}
+    </div>
+  </div>
+</body>
+</html>
