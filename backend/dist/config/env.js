@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getConfig = getConfig;
+require("dotenv/config");
 const zod_1 = require("zod");
 const path_1 = __importDefault(require("path"));
 /**
