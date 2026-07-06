@@ -4,9 +4,9 @@ import path from 'path';
 import { logger } from '../../core/logger';
 
 // Lazy-loaded Puppeteer to avoid startup cost
-let puppeteer: typeof import('puppeteer') | null = null;
+let puppeteer: any = null;
 
-async function getPuppeteer() {
+async function getPuppeteer(): Promise<any> {
   if (!puppeteer) {
     puppeteer = await import('puppeteer');
   }
