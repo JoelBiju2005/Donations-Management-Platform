@@ -32,15 +32,17 @@ const envSchema = z.object({
   EMAIL_FROM_NAME: z.string().default('Sri Devi Temple'),
 
   // Storage
-  STORAGE_PROVIDER: z.enum(['local', 's3']).default('local'),
+  STORAGE_PROVIDER: z.enum(['local', 's3']).default('s3'), // Default to s3 for production
   UPLOAD_DIR: z.string().default(path.resolve(process.cwd(), 'uploads')),
 
-  // S3-compatible storage (only when STORAGE_PROVIDER=s3)
-  S3_BUCKET: z.string().optional(),
-  S3_REGION: z.string().optional(),
-  S3_ACCESS_KEY: z.string().optional(),
-  S3_SECRET_KEY: z.string().optional(),
-  S3_ENDPOINT: z.string().optional(),
+  // AWS S3 standard environment variables
+  AWS_ACCESS_KEY_ID: z.string().optional(),
+  AWS_SECRET_ACCESS_KEY: z.string().optional(),
+  AWS_REGION: z.string().optional(),
+  AWS_S3_BUCKET_NAME: z.string().optional(),
+
+  // Google Gemini API Key
+  GEMINI_API_KEY: z.string().optional(),
 
   // Verification thresholds (configurable, also editable in admin settings)
   OCR_CONFIDENCE_THRESHOLD: z.coerce.number().min(0).max(100).default(60),

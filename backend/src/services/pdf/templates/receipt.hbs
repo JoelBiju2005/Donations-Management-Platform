@@ -11,7 +11,9 @@
     .receipt { max-width: 700px; margin: 0 auto; padding: 40px; }
 
     /* Header */
-    .receipt-header { text-align: center; border-bottom: 2px solid #C9A227; padding-bottom: 24px; margin-bottom: 32px; }
+    .receipt-header { text-align: center; border-bottom: 2px solid #C9A227; padding-bottom: 24px; margin-bottom: 32px; position: relative; }
+    .logo-container { margin-bottom: 12px; }
+    .temple-logo { max-height: 80px; object-contain: contain; }
     .temple-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #6B1D24; font-weight: 700; margin-bottom: 4px; }
     .temple-address { font-size: 12px; color: #888; margin-bottom: 8px; }
     .receipt-title { font-size: 18px; font-weight: 600; color: #C9A227; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; }
@@ -54,6 +56,11 @@
 <body>
   <div class="receipt">
     <div class="receipt-header">
+      {{#if logoUrl}}
+      <div class="logo-container">
+        <img class="temple-logo" src="{{logoUrl}}" alt="Temple Logo" />
+      </div>
+      {{/if}}
       <div class="temple-name">{{templeName}}</div>
       <div class="temple-address">{{templeAddress}}</div>
       <div class="receipt-title">Donation Receipt</div>
@@ -65,7 +72,7 @@
         <div class="value" style="font-size: 16px; color: #6B1D24;">{{receiptNumber}}</div>
       </div>
       <div style="text-align: right;">
-        <div class="label">Date</div>
+        <div class="label">Receipt Date</div>
         <div class="value">{{date}}</div>
       </div>
     </div>
@@ -91,7 +98,7 @@
       </tr>
       <tr>
         <td>Payment Method</td>
-        <td>{{paymentMethod}}</td>
+        <td style="text-transform: capitalize;">{{paymentMethod}}</td>
       </tr>
       {{#if transactionId}}
       <tr>
@@ -99,12 +106,14 @@
         <td style="font-family: monospace;">{{transactionId}}</td>
       </tr>
       {{/if}}
-      {{#if time}}
       <tr>
-        <td>Time</td>
-        <td>{{time}}</td>
+        <td>Verification Status</td>
+        <td style="font-weight: bold; color: #3D7A4A;">{{qrVerificationStatus}}</td>
       </tr>
-      {{/if}}
+      <tr>
+        <td>Generated Timestamp</td>
+        <td>{{generatedTimestamp}}</td>
+      </tr>
     </table>
 
     {{#if dedicationNote}}

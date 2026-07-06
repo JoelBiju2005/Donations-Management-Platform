@@ -15,6 +15,7 @@ const env_1 = require("../../config/env");
 const verification_queue_1 = require("../../queues/verification.queue");
 const redis_1 = require("../../config/redis");
 const logger_1 = require("../../core/logger");
+const receiptAutomation_1 = require("../../services/receipt/receiptAutomation");
 /**
  * POST /api/donations/session
  * Initialize a donation session — creates a server-side record with a signed token.
@@ -238,6 +239,18 @@ exports.updateDonationStatus = (0, asyncHandler_1.asyncHandler)(async (req, res)
         };
     }
     await donation.save();
+    // If manual status update is successful, automate PDF receipt generation and email delivery
+    if (status === 'successful') {
+        // Run asynchronously in the background so it doesn't block the HTTP response
+        setImmediate(async () => {
+            try {
+                await (0, receiptAutomation_1.automateSuccessfulDonationReceipt)(donation);
+            }
+            catch (err) {
+                logger_1.logger.error({ donationId: donation._id, error: err.message }, 'Failed to automate receipt generation on manual admin release');
+            }
+        });
+    }
     // Audit log
     await (0, AuditLog_1.createAuditEntry)({
         actor: admin.id,

@@ -19,6 +19,8 @@ export declare function generateReceiptPdf(data: {
     date: string;
     time?: string;
     dedicationNote?: string;
+    qrVerificationStatus?: string;
+    generatedTimestamp?: string;
 }): Promise<Buffer>;
 /**
  * Generate a bank statement-style report PDF.

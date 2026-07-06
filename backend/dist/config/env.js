@@ -31,14 +31,15 @@ const envSchema = zod_1.z.object({
     EMAIL_FROM_ADDRESS: zod_1.z.string().email().default('noreply@temple.local'),
     EMAIL_FROM_NAME: zod_1.z.string().default('Sri Devi Temple'),
     // Storage
-    STORAGE_PROVIDER: zod_1.z.enum(['local', 's3']).default('local'),
+    STORAGE_PROVIDER: zod_1.z.enum(['local', 's3']).default('s3'), // Default to s3 for production
     UPLOAD_DIR: zod_1.z.string().default(path_1.default.resolve(process.cwd(), 'uploads')),
-    // S3-compatible storage (only when STORAGE_PROVIDER=s3)
-    S3_BUCKET: zod_1.z.string().optional(),
-    S3_REGION: zod_1.z.string().optional(),
-    S3_ACCESS_KEY: zod_1.z.string().optional(),
-    S3_SECRET_KEY: zod_1.z.string().optional(),
-    S3_ENDPOINT: zod_1.z.string().optional(),
+    // AWS S3 standard environment variables
+    AWS_ACCESS_KEY_ID: zod_1.z.string().optional(),
+    AWS_SECRET_ACCESS_KEY: zod_1.z.string().optional(),
+    AWS_REGION: zod_1.z.string().optional(),
+    AWS_S3_BUCKET_NAME: zod_1.z.string().optional(),
+    // Google Gemini API Key
+    GEMINI_API_KEY: zod_1.z.string().optional(),
     // Verification thresholds (configurable, also editable in admin settings)
     OCR_CONFIDENCE_THRESHOLD: zod_1.z.coerce.number().min(0).max(100).default(60),
     FRAUD_RISK_THRESHOLD: zod_1.z.coerce.number().min(0).max(100).default(70),

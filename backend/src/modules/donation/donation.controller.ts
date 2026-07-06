@@ -10,6 +10,7 @@ import { getConfig } from '../../config/env';
 import { enqueueVerificationJob, processVerificationInProcess } from '../../queues/verification.queue';
 import { isRedisAvailable } from '../../config/redis';
 import { logger } from '../../core/logger';
+import { automateSuccessfulDonationReceipt } from '../../services/receipt/receiptAutomation';
 
 /**
  * POST /api/donations/session
@@ -268,6 +269,18 @@ export const updateDonationStatus = asyncHandler(async (req: Request, res: Respo
   }
 
   await donation.save();
+
+  // If manual status update is successful, automate PDF receipt generation and email delivery
+  if (status === 'successful') {
+    // Run asynchronously in the background so it doesn't block the HTTP response
+    setImmediate(async () => {
+      try {
+        await automateSuccessfulDonationReceipt(donation);
+      } catch (err: any) {
+        logger.error({ donationId: donation._id, error: err.message }, 'Failed to automate receipt generation on manual admin release');
+      }
+    });
+  }
 
   // Audit log
   await createAuditEntry({

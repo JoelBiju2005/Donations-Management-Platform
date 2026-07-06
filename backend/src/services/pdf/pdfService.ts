@@ -54,6 +54,8 @@ export async function generateReceiptPdf(data: {
   date: string;
   time?: string;
   dedicationNote?: string;
+  qrVerificationStatus?: string;
+  generatedTimestamp?: string;
 }): Promise<Buffer> {
   const template = await loadTemplate('receipt');
   const html = template(data);

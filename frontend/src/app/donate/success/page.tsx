@@ -83,12 +83,22 @@ export default function SuccessPage() {
         )}
 
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 no-print">
+        <div className="flex flex-col sm:flex-row gap-3 no-print mb-4">
+          {donation?.receipt?.pdfUrl && (
+            <a
+              href={donation.receipt.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 py-3 bg-success text-white font-medium rounded-lg hover:bg-success/90 transition-colors text-center"
+            >
+              📄 Download PDF Receipt
+            </a>
+          )}
           <button
             onClick={() => window.print()}
             className="flex-1 py-3 bg-maroon text-white font-medium rounded-lg hover:bg-maroon/90 transition-colors"
           >
-            🖨️ Print Receipt
+            🖨️ Print View
           </button>
           <Link
             href="/"
