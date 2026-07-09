@@ -5,9 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "tsc && npm run copy-templates",
+    "copy-templates": "node -e \"const fs=require('fs');const path=require('path');const dirs=[['src/services/pdf/templates','dist/services/pdf/templates'],['src/services/email/templates','dist/services/email/templates']];dirs.forEach(([s,d])=>{if(fs.existsSync(s)){fs.mkdirSync(d,{recursive:true});fs.readdirSync(s).filter(f=>f.endsWith('.hbs')).forEach(f=>fs.copyFileSync(path.join(s,f),path.join(d,f)))}});console.log('✅ Templates copied to dist/')\"",
     "start": "node dist/index.js",
     "seed": "tsx src/scripts/seed.ts",
+    "seed:prod": "node dist/scripts/seed.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src/",
