@@ -15,7 +15,7 @@ const envSchema = zod_1.z.object({
     // Server
     NODE_ENV: zod_1.z.enum(['development', 'production', 'test']).default('development'),
     PORT: zod_1.z.coerce.number().default(5000),
-    FRONTEND_URL: zod_1.z.string().url().default('http://localhost:3000'),
+    FRONTEND_URL: zod_1.z.string().default('http://localhost:3000'),
     // MongoDB
     MONGODB_URI: zod_1.z.string().default('mongodb://localhost:27017/temple-donations'),
     // Redis (optional — falls back to in-process queue if unavailable)
@@ -30,7 +30,7 @@ const envSchema = zod_1.z.object({
     // Email (Brevo) — optional for dev, required for production
     BREVO_API_KEY: zod_1.z.string().optional(),
     EMAIL_FROM_ADDRESS: zod_1.z.string().email().default('noreply@temple.local'),
-    EMAIL_FROM_NAME: zod_1.z.string().default('Sri Devi Temple'),
+    EMAIL_FROM_NAME: zod_1.z.string().default('Daanam Digital'),
     // Storage
     STORAGE_PROVIDER: zod_1.z.enum(['local', 's3']).default('s3'), // Default to s3 for production
     UPLOAD_DIR: zod_1.z.string().default(path_1.default.resolve(process.cwd(), 'uploads')),

@@ -23,7 +23,7 @@ function createSecurityMiddleware() {
                 styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
                 fontSrc: ["'self'", 'https://fonts.gstatic.com'],
                 imgSrc: ["'self'", 'data:', 'blob:'],
-                connectSrc: ["'self'", config.FRONTEND_URL],
+                connectSrc: ["'self'", ...config.FRONTEND_URL.split(',').map((u) => u.trim())],
                 frameSrc: ["'none'"],
                 objectSrc: ["'none'"],
                 baseUri: ["'self'"],

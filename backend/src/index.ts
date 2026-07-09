@@ -23,6 +23,7 @@ import { healthRoutes } from './modules/health/health.controller';
 // Workers & jobs
 import { startVerificationWorker } from './workers/verification.worker';
 import { startScheduledJobs } from './jobs/scheduler';
+import { runSeed } from './scripts/seed';
 
 async function bootstrap(): Promise<void> {
   // Validate environment first
@@ -31,6 +32,14 @@ async function bootstrap(): Promise<void> {
 
   // Connect to databases
   await connectDatabase();
+
+  // Run auto-seeding
+  try {
+    await runSeed();
+  } catch (error) {
+    logger.error({ error }, '⚠️ Auto-seeding failed during startup');
+  }
+
   const redis = await connectRedis();
 
   // Create Express app

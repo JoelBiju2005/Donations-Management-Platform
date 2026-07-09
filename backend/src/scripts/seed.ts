@@ -5,24 +5,16 @@ import { connectDatabase, disconnectDatabase } from '../config/database';
 import { logger } from '../core/logger';
 
 /**
- * Seed script — creates the initial admin account and default temple settings.
- *
- * ⚠️  IMPORTANT: Seeded credentials are development defaults only.
- * Change the password and rotate JWT_SECRET before any production deployment.
- *
- * Reads from environment variables:
- *   SEED_ADMIN_EMAIL — admin email (default: admin@temple.local)
- *   SEED_ADMIN_PASSWORD — admin password (default: ChangeMe!2026)
+ * Core seeding logic — can be called at startup or from the CLI.
+ * Does not manage database connection lifecycle.
  */
-async function seed(): Promise<void> {
+export async function runSeed(): Promise<void> {
   const config = getConfig();
 
-  logger.info('🌱 Starting seed script...');
-
-  await connectDatabase();
+  logger.info('🌱 Running database seeding check...');
 
   // ─── Seed Admin User ──────────────────────────────────────
-  const existingAdmin = await AdminUser.findOne({ email: config.SEED_ADMIN_EMAIL });
+  const existingAdmin = await AdminUser.findOne({ email: config.SEED_ADMIN_EMAIL.toLowerCase() });
 
   if (existingAdmin) {
     logger.info({ email: config.SEED_ADMIN_EMAIL }, 'Admin user already exists, skipping');
@@ -40,12 +32,20 @@ async function seed(): Promise<void> {
   // ─── Seed Temple Settings ────────────────────────────────
   const settings = await getTempleSettings();
   logger.info({ templeName: settings.templeName }, '✅ Temple settings initialized');
-
-  await disconnectDatabase();
-  logger.info('🌱 Seed completed successfully');
 }
 
-seed().catch((error) => {
-  logger.fatal({ error }, 'Seed script failed');
-  process.exit(1);
-});
+// standalone execution support
+if (require.main === module || (process.argv[1] && process.argv[1].endsWith('seed.ts')) || (process.argv[1] && process.argv[1].endsWith('seed.js'))) {
+  const runStandalone = async () => {
+    await connectDatabase();
+    await runSeed();
+    await disconnectDatabase();
+    logger.info('🌱 Standalone seed completed successfully');
+  };
+
+  runStandalone().catch((error) => {
+    logger.fatal({ error }, 'Standalone seed script failed');
+    process.exit(1);
+  });
+}
+

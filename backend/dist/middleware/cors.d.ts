@@ -1,7 +1,8 @@
 import { RequestHandler } from 'express';
 /**
- * CORS configuration locked to the known frontend origin.
- * Allows credentials (cookies) for refresh token flow.
+ * CORS configuration supporting multiple frontend origins.
+ * Set FRONTEND_URL to a comma-separated list of allowed origins.
+ * Example: "http://localhost:3000,https://daanam-digital.vercel.app"
  */
 export declare function createCorsMiddleware(): RequestHandler;
 //# sourceMappingURL=cors.d.ts.map

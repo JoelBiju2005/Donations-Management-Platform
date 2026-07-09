@@ -7,13 +7,27 @@ exports.createCorsMiddleware = createCorsMiddleware;
 const cors_1 = __importDefault(require("cors"));
 const env_1 = require("../config/env");
 /**
- * CORS configuration locked to the known frontend origin.
- * Allows credentials (cookies) for refresh token flow.
+ * CORS configuration supporting multiple frontend origins.
+ * Set FRONTEND_URL to a comma-separated list of allowed origins.
+ * Example: "http://localhost:3000,https://daanam-digital.vercel.app"
  */
 function createCorsMiddleware() {
     const config = (0, env_1.getConfig)();
+    // Support comma-separated origins
+    const allowedOrigins = config.FRONTEND_URL
+        .split(',')
+        .map((url) => url.trim())
+        .filter(Boolean);
     return (0, cors_1.default)({
-        origin: config.FRONTEND_URL,
+        origin: (origin, callback) => {
+            // Allow requests with no origin (server-to-server, curl, etc.)
+            if (!origin)
+                return callback(null, true);
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+            callback(new Error(`CORS: origin ${origin} not allowed`));
+        },
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID', 'X-Idempotency-Key'],

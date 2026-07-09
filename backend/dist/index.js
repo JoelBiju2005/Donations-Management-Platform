@@ -26,12 +26,20 @@ const health_controller_1 = require("./modules/health/health.controller");
 // Workers & jobs
 const verification_worker_1 = require("./workers/verification.worker");
 const scheduler_1 = require("./jobs/scheduler");
+const seed_1 = require("./scripts/seed");
 async function bootstrap() {
     // Validate environment first
     const config = (0, env_1.getConfig)();
     logger_1.logger.info({ env: config.NODE_ENV }, '🚀 Starting Temple Donations API');
     // Connect to databases
     await (0, database_1.connectDatabase)();
+    // Run auto-seeding
+    try {
+        await (0, seed_1.runSeed)();
+    }
+    catch (error) {
+        logger_1.logger.error({ error }, '⚠️ Auto-seeding failed during startup');
+    }
     const redis = await (0, redis_1.connectRedis)();
     // Create Express app
     const app = (0, express_1.default)();
