@@ -17,7 +17,12 @@ export async function runSeed(): Promise<void> {
   const existingAdmin = await AdminUser.findOne({ email: config.SEED_ADMIN_EMAIL.toLowerCase() });
 
   if (existingAdmin) {
-    logger.info({ email: config.SEED_ADMIN_EMAIL }, 'Admin user already exists, skipping');
+    logger.info({ email: config.SEED_ADMIN_EMAIL }, 'Admin user already exists, updating password/role to match env config');
+    existingAdmin.passwordHash = config.SEED_ADMIN_PASSWORD; // Pre-save hook will hash this
+    existingAdmin.role = 'super_admin';
+    existingAdmin.isActive = true;
+    await existingAdmin.save();
+    logger.info({ email: config.SEED_ADMIN_EMAIL }, '✅ Admin user updated successfully');
   } else {
     await AdminUser.create({
       email: config.SEED_ADMIN_EMAIL,
